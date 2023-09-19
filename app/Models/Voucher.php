@@ -22,7 +22,7 @@ class Voucher extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function payment(): HasMany
+    public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
     }
