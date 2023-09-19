@@ -23,8 +23,8 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('price')->required(),
+                Forms\Components\TextInput::make('name')->required()->string(),
+                Forms\Components\TextInput::make('price')->placeholder('10.1')->required()->rule('decimal:1'),
                 Forms\Components\TextInput::make('slug'),
             ]);
     }
