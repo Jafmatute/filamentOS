@@ -17,9 +17,15 @@ class Product extends Model
         "image",
     ];
 
-    public function voucher() : HasMany {
+    public function voucher(): HasMany
+    {
 
         return $this->hasMany(Voucher::class);
 
+    }
+
+    public function payment(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }
