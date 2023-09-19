@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VoucherResource extends Resource
 {
@@ -23,10 +21,14 @@ class VoucherResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("code")->string()->required(),
-                Forms\Components\TextInput::make("discount_percent")->label("Discount (%)"),
+                Forms\Components\TextInput::make("code")->string()->required()->unique(),
+                Forms\Components\TextInput::make("discount_percent")
+                    ->label("Discount (%)")
+                    ->numeric()
+                    ->default(10)
+                    ->extraInputAttributes(['min' => 1, 'max' => 100, 'step' => 1]),
                 Forms\Components\Select::make("product_id")
-                ->relationship('product', 'name')
+                    ->relationship('product', 'name')
             ]);
     }
 
