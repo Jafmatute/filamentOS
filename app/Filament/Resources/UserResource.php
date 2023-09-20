@@ -65,7 +65,7 @@ class UserResource extends Resource
                         $record->update([
                             'password' => Hash::make($data['new_password'])
                         ]);
-                        
+
                         Notification::make()->title("Password update successfully")->success()->send();
                     })
             ])
