@@ -20,6 +20,7 @@ class ListPayments extends ListRecords
 
     protected function getTableContentFooter(): ?View
     {
+        //TODO: Revisar, no se visualiza la vista personalizada
         return view('filament.payments.footer');
     }
 }
