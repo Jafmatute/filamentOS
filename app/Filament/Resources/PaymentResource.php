@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PaymentResource\Pages;
 use App\Filament\Resources\PaymentResource\RelationManagers;
 use App\Models\Payment;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +31,7 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('created_at')->label("Payment time"),
+                TextColumn::make('created_at')->label("Payment time")->sortable(),
                 TextColumn::make('product.name'),
                 TextColumn::make('user.name')->label('User name'),
                 TextColumn::make('user.email')->label('User email'),
@@ -38,8 +40,19 @@ class PaymentResource extends Resource
                 TextColumn::make('taxes')->money('Lps'),
                 TextColumn::make('total')->money('Lps'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Filter::make("created_at")
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])->query(function ($query, array $data) {
+                        return $query
+                            ->when($data['created_from'],
+                                fn($query) => $query->whereDate('created_at', '>=', $data['created_from']))
+                            ->when($data['created_until'],
+                                fn($query) => $query->whereDate('created_at', '<=', $data['created_until']));
+                    })
             ])
             ->actions([
 
