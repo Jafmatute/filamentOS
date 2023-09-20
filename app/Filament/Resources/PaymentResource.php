@@ -32,8 +32,10 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('created_at')->label("Payment time")->sortable(),
-                TextColumn::make('product.name'),
-                TextColumn::make('user.name')->label('User name'),
+                TextColumn::make('product.name')
+                    ->url(fn(Payment $record) => ProductResource::getUrl('edit', ["record" => $record->product])),
+                TextColumn::make('user.name')->label('User name')
+                    ->url(fn(Payment $record) => UserResource::getUrl('edit', ["record" => $record->user])),
                 TextColumn::make('user.email')->label('User email'),
                 TextColumn::make('voucher.code'),
                 TextColumn::make('sub_total')->money('Lps'),
