@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\RelationManagers\TagsRelationManager;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -34,9 +34,9 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('slug')->required(),
                 Forms\Components\TextInput::make('price')->placeholder('10')->required()->rule('numeric'),
                 Forms\Components\FileUpload::make("image"),
-                Forms\Components\Select::make('tags')
-                    ->relationship('tags', 'name')
-                    ->multiple()
+//                Forms\Components\Select::make('tags')
+//                    ->relationship('tags', 'name')
+//                    ->multiple()
             ]);
     }
 
@@ -68,7 +68,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TagsRelationManager::class,
         ];
     }
 
