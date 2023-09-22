@@ -47,19 +47,14 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
+
     //filament add
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->email, '@admin.com');
     }
 
-    public function panel(Panel $panel): Panel
-    {
-        return $panel
-            ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
-            ]);
-    }
+
 
 
     public function payment(): HasMany
