@@ -34,4 +34,5 @@ class Product extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    
 }
