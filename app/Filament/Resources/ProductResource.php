@@ -28,15 +28,23 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Wizard::make([
+                Forms\Components\Wizard\Step::make("Main fields")
+            ->schema([
                 Forms\Components\TextInput::make('name')->required()->string()
                     ->reactive()
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')->required(),
-                Forms\Components\TextInput::make('price')->placeholder('10')->required()->rule('numeric'),
-                Forms\Components\FileUpload::make("image"),
+            ])->columns(2),
+               Forms\Components\Wizard\Step::make("Secondary fields")
+                ->schema([
+                    Forms\Components\TextInput::make('price')->placeholder('10')->required()->rule('numeric'),
+                    Forms\Components\FileUpload::make("image"),
+                ])->columns(2)
 //                Forms\Components\Select::make('tags')
 //                    ->relationship('tags', 'name')
 //                    ->multiple()
+                ])
             ]);
     }
 
