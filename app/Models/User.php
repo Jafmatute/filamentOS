@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -52,10 +53,20 @@ class User extends Authenticatable implements FilamentUser
         return str_ends_with($this->email, '@admin.com');
     }
 
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+            ]);
+    }
+
 
     public function payment(): HasMany
     {
         return $this->hasMany(Payment::class);
     }
+
+
 
 }

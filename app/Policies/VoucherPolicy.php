@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Product;
+use App\Models\Voucher;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPolicy
+class VoucherPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_product');
+        return $user->can('view_any_voucher');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function view(User $user, Product $product): bool
+    public function view(User $user, Voucher $voucher): bool
     {
-        return $user->can('view_product');
+        return $user->can('view_voucher');
     }
 
     /**
@@ -41,31 +41,31 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_product');
+        return $user->can('create_voucher');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function update(User $user, Product $product): bool
+    public function update(User $user, Voucher $voucher): bool
     {
-        return $user->can('update_product');
+        return $user->can('update_voucher');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function delete(User $user, Product $product): bool
+    public function delete(User $user, Voucher $voucher): bool
     {
-        return $user->can('delete_product');
+        return $user->can('delete_voucher');
     }
 
     /**
@@ -76,19 +76,19 @@ class ProductPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_product');
+        return $user->can('delete_any_voucher');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function forceDelete(User $user, Product $product): bool
+    public function forceDelete(User $user, Voucher $voucher): bool
     {
-        return $user->can('force_delete_product');
+        return $user->can('force_delete_voucher');
     }
 
     /**
@@ -99,19 +99,19 @@ class ProductPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_product');
+        return $user->can('force_delete_any_voucher');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function restore(User $user, Product $product): bool
+    public function restore(User $user, Voucher $voucher): bool
     {
-        return $user->can('restore_product');
+        return $user->can('restore_voucher');
     }
 
     /**
@@ -122,19 +122,19 @@ class ProductPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_product');
+        return $user->can('restore_any_voucher');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Voucher  $voucher
      * @return bool
      */
-    public function replicate(User $user, Product $product): bool
+    public function replicate(User $user, Voucher $voucher): bool
     {
-        return $user->can('replicate_product');
+        return $user->can('replicate_voucher');
     }
 
     /**
@@ -145,7 +145,7 @@ class ProductPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_product');
+        return $user->can('reorder_voucher');
     }
 
 }

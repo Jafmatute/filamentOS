@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Product;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_product');
+        return $user->can('view_any_shield::role');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function view(User $user, Product $product): bool
+    public function view(User $user, Role $role): bool
     {
-        return $user->can('view_product');
+        return $user->can('view_shield::role');
     }
 
     /**
@@ -41,31 +41,31 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_product');
+        return $user->can('create_shield::role');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function update(User $user, Product $product): bool
+    public function update(User $user, Role $role): bool
     {
-        return $user->can('update_product');
+        return $user->can('update_shield::role');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function delete(User $user, Product $product): bool
+    public function delete(User $user, Role $role): bool
     {
-        return $user->can('delete_product');
+        return $user->can('delete_shield::role');
     }
 
     /**
@@ -76,19 +76,19 @@ class ProductPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_product');
+        return $user->can('delete_any_shield::role');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function forceDelete(User $user, Product $product): bool
+    public function forceDelete(User $user, Role $role): bool
     {
-        return $user->can('force_delete_product');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -99,19 +99,19 @@ class ProductPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_product');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function restore(User $user, Product $product): bool
+    public function restore(User $user, Role $role): bool
     {
-        return $user->can('restore_product');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -122,19 +122,19 @@ class ProductPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_product');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return bool
      */
-    public function replicate(User $user, Product $product): bool
+    public function replicate(User $user, Role $role): bool
     {
-        return $user->can('replicate_product');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -145,7 +145,7 @@ class ProductPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_product');
+        return $user->can('{{ Reorder }}');
     }
 
 }
